@@ -200,5 +200,5 @@ socket.on("get-game-state", (roomCode) => {
 });
 
 server.listen(3001, () => {
-  console.log("Backend running on http://localhost:3001");
+  console.log("Backend running on http://localhost:5173");
 });
