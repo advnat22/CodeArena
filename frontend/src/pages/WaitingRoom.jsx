@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { socket } from "../socket";
 import "./WaitingRoom.css";
 
-// ✅ SAFE username (never null / empty)
+// SAFE username (never null)
 const playerName =
   localStorage.getItem("username")?.trim() || "Player";
 
@@ -32,8 +32,8 @@ export default function WaitingRoom() {
         return players;
       });
 
-      // NOTE: creator is socket.id on backend
-      setIsCreator(creator === socket.id);
+      // creator is a NAME (backend logic)
+      setIsCreator(creator === playerName);
     });
 
     // GAME START
