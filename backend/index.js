@@ -199,9 +199,6 @@ socket.on("get-game-state", (roomCode) => {
   });
 });
 
-const PORT = process.env.PORT || 3001;
-
-server.listen(PORT, () => {
-  console.log(`Backend running on port ${PORT}`);
+server.listen(3001, () => {
+  console.log("Backend running on https://codearena-tdxq.onrender.com");
 });
-
