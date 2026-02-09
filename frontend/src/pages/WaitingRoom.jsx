@@ -3,7 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { socket } from "../socket";
 import "./WaitingRoom.css";
 
-const playerName = localStorage.getItem("username");
+// ✅ SAFE username (never null / empty)
+const playerName =
+  localStorage.getItem("username")?.trim() || "Player";
 
 export default function WaitingRoom() {
   const { roomCode } = useParams();
@@ -14,21 +16,27 @@ export default function WaitingRoom() {
   const [justJoined, setJustJoined] = useState(null);
 
   useEffect(() => {
+    // JOIN ROOM
     socket.emit("join-room", { roomCode, playerName });
 
+    // ROOM UPDATE
     socket.on("room-update", ({ players, creator }) => {
       setPlayers((prev) => {
         if (players.length > prev.length) {
-          const newPlayer = players.find(p => !prev.includes(p));
+          const newPlayer = players.find(
+            (p) => !prev.includes(p)
+          );
           setJustJoined(newPlayer);
           setTimeout(() => setJustJoined(null), 800);
         }
         return players;
       });
 
-      setIsCreator(creator === playerName);
+      // NOTE: creator is socket.id on backend
+      setIsCreator(creator === socket.id);
     });
 
+    // GAME START
     socket.on("game-started", () => {
       navigate(`/game/${roomCode}`);
     });
@@ -53,15 +61,15 @@ export default function WaitingRoom() {
         </p>
 
         <div className="players">
-          {players.map((p) => (
+          {players.map((p, i) => (
             <div
-              key={p}
+              key={i}
               className={`player
                 ${p === playerName ? "you" : ""}
                 ${p === justJoined ? "joined" : ""}
               `}
             >
-              {p}
+              {p || "Player"}
               {p === playerName && (
                 <span className="you-tag">YOU</span>
               )}
@@ -70,11 +78,16 @@ export default function WaitingRoom() {
         </div>
 
         {players.length < 2 && (
-          <p className="waiting-text">Waiting for opponent…</p>
+          <p className="waiting-text">
+            Waiting for opponent…
+          </p>
         )}
 
         {isCreator && players.length === 2 && (
-          <button className="btn primary pulse" onClick={startGame}>
+          <button
+            className="btn primary pulse"
+            onClick={startGame}
+          >
             ▶ Start Game
           </button>
         )}
