@@ -1,0 +1,143 @@
+/* Fullscreen animated background */
+.home {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background:
+    linear-gradient(
+      rgba(8, 8, 18, 0.48),
+      rgba(8, 8, 18, 0.48)
+    ),
+    url("/bg.jpg") center / cover no-repeat;
+animation: slowPan 20s ease-in-out infinite alternate;
+
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+
+
+@keyframes slowPan {
+  from {
+    background-position: center;
+  }
+  to {
+    background-position: center top;
+  }
+}
+
+/* Glass card */
+.home-card {
+  background: rgba(20, 20, 30, 0.75);
+  backdrop-filter: blur(16px);
+  padding: 3rem;
+  border-radius: 18px;
+  box-shadow: 0 0 40px rgba(108, 99, 255, 0.25);
+  text-align: center;
+  width: 340px;
+}
+
+/* Neon title */
+.home-title {
+  font-size: 3rem;
+  margin-bottom: 0.4rem;
+  color: #fff;
+  text-shadow: 0 0 18px rgba(108, 99, 255, 0.9);
+}
+
+.home-subtitle {
+  color: #aaa;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+}
+
+/* Inputs */
+.home-input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #0f0f16;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.25s ease;
+}
+
+.home-input:focus {
+  box-shadow: 0 0 0 2px #6c63ff;
+}
+
+/* Buttons */
+.home-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #6c63ff, #8b7cff);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(108, 99, 255, 0.5);
+}
+
+.btn.secondary {
+  background: #222;
+  color: #ddd;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+/* Inline error */
+.home-error {
+  margin-top: 0.75rem;
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  background: rgba(255, 80, 80, 0.15);
+  border: 1px solid rgba(255, 80, 80, 0.5);
+  color: #ffb3b3;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  animation: errorPop 0.3s ease;
+}
+
+/* Error animation */
+@keyframes errorPop {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Background animation */
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
