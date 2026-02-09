@@ -17,9 +17,6 @@ const io = new Server(server, {
   cors: { origin: "*" },
 });
 
-app.get("/", (req, res) => {
-  res.redirect("https://codearena-tdxq.onrender.com");
-});
 
 /*
 roomCode -> {
@@ -203,6 +200,8 @@ socket.on("get-game-state", (roomCode) => {
   });
 });
 
-server.listen(3001, () => {
-  console.log("Backend running on https://codearena-tdxq.onrender.com");
+const PORT = process.env.PORT || 3001;
+
+server.listen(PORT, () => {
+  console.log(`Backend running on port ${PORT}`);
 });
