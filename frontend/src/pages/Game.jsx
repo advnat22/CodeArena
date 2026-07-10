@@ -115,10 +115,29 @@ export default function Game() {
 
         <div className="editor">
           <textarea
-            value={code}
-            onChange={(e) => setCode(e.target.value)}
-            disabled={!!winner || timeLeft === 0}
-          />
+  value={code}
+  onChange={(e) => setCode(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === "Tab") {
+      e.preventDefault();
+
+      const start = e.target.selectionStart;
+      const end = e.target.selectionEnd;
+
+      const newCode =
+        code.substring(0, start) +
+        "    " + // 4 spaces
+        code.substring(end);
+
+      setCode(newCode);
+
+      requestAnimationFrame(() => {
+        e.target.selectionStart = e.target.selectionEnd = start + 4;
+      });
+    }
+  }}
+  disabled={!!winner || timeLeft === 0}
+/>
 
           <button
             className={`submit-btn ${winner ? "disabled" : ""}`}
