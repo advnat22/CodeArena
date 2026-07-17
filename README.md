@@ -6,7 +6,7 @@
 A real-time 1v1 competitive coding platform where two players battle head-to-head to solve algorithmic problems under time pressure. Built with a synchronized multiplayer architecture, backend code execution sandbox, and live winner locking.
 
 **Live Demo:**
-https://codearena-wkgs.onrender.com 
+https://code-arena-eight-liart.vercel.app/
 </div>
 
 ## **Why Code Arena?**
