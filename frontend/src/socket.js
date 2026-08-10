@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
 export const socket = io("https://codearena-wkgs.onrender.com", {
-  transports: ["websocket"],
+  transports: ["polling", "websocket"],
   autoConnect: true,
 });
